@@ -10,6 +10,14 @@ DocCreator — это кросс-платформенное desktop-прилож
 
 ## Установка
 
-1. Клонируйте репозиторий:
-   `git clone https://github.com/yourusername/DocCreator.git`
+1. Клонируйте репозиторий: `git clone https://github.com/Ecolis/DocCreator`
+2. Перейдите в директорию проекта: `cd DocCreator`
+3. Установите зависимости: `npm install`
+4. Запустите приложение: `npm start`
+
+## Обратная связь
+Мы рады любым предложениям и улучшениям!
+
+![Спасибо](https://mixmag.io/wp-content/pics5/2021/03/image022-2.gif)
+
 
