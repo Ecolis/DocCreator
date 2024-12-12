@@ -76,6 +76,7 @@ body {
 }
 
 .submit a,
+.submit button,
 .send a,
 .buttom {
     text-decoration: none;
@@ -88,6 +89,7 @@ body {
 }
 
 .submit a:hover,
+.submit button:hover,
 .send a:hover,
 button:hover {
     background-color: #0056b3;
