@@ -11,9 +11,11 @@ DocCreator — это кросс-платформенное desktop-прилож
 ## Установка
 
 1. Клонируйте репозиторий: `git clone https://github.com/Ecolis/DocCreator`
-2. Перейдите в директорию проекта: `cd DocCreator`
-3. Установите зависимости: `npm install`
-4. Запустите приложение: `npm start`
+2. Установите MySQL (mac) `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+   `brew install mysql`
+3. Перейдите в директорию проекта: `cd DocCreator`
+4. Установите зависимости: `npm install`
+5. Запустите приложение: `npm start`
 
 ## Обратная связь
 Мы рады любым предложениям и улучшениям!
