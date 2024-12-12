@@ -5,8 +5,8 @@ const { BrowserWindow, app } = require('electron');
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 600,
+        width: 1280,
+        height: 720,
         icon: __dirname + "./img/icon.png",
         autoHideMenuBar: true, 
         webPreferences: {
