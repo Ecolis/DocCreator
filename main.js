@@ -15,7 +15,6 @@ app.on('ready', () => {
     });
 
     mainWindow.loadFile(path.join(__dirname, 'html', 'index.html'));
-    
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, './html/index.html'),
@@ -23,7 +22,7 @@ app.on('ready', () => {
         slashes: true
     }));
 
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', ()=>{
         win = null;   

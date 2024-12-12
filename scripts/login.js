@@ -16,6 +16,8 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
         if (response.ok) {
             // Перенаправляем пользователя при успешном входе
+            const { name, email } = await response.json();
+            localStorage.setItem('user', JSON.stringify({ name, email }));
             window.location.href = './dashboard.html';
         } else {
             // Показываем сообщение об ошибке

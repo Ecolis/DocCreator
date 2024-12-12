@@ -87,7 +87,8 @@ app.post('/login', async (req, res) => {
         }
 
         console.log('Успешный вход для пользователя:', email);
-        res.send('Вход успешен!');
+        res.json({ name: user.name, email: user.email });
+        // res.send('Вход успешен!');
     } catch (err) {
         console.error('Ошибка сервера:', err);
         res.status(500).send('Ошибка сервера.');
