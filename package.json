@@ -1,0 +1,14 @@
+{
+  "name": "doccreator",
+  "version": "1.0.0",
+  "description": "app for creating any documents",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "DocCreator team",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.2.1"
+  }
+}

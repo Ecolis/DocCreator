@@ -1,0 +1,105 @@
+/* Основной стиль для body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('C:/Users/abori/OneDrive/Рабочий стол/www/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+
+/* Основной контейнер */
+.main {
+    width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для объёма */
+}
+
+
+.main h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-group p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-group input {
+    width: calc(100% - 10px);
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.back a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.back a:hover {
+    text-decoration: underline;
+}
+
+
+.submit {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.submit a,
+.send a,
+.buttom {
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit a:hover,
+.send a:hover,
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
