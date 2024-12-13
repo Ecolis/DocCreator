@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
+const app = express();
 
 // Подключение к базе данных
 const db = mysql.createPool({
@@ -15,7 +16,6 @@ const db = mysql.createPool({
     queueLimit: 0,
 });
 
-const app = express();
 app.use(bodyParser.json());
 
 // Маршрут для регистрации
@@ -39,7 +39,6 @@ app.post('/register', async (req, res) => {
         res.status(500).send('Ошибка базы данных.');
     }
 });
-
 
 // Маршрут для входа
 app.post('/login', async (req, res) => {
@@ -88,14 +87,11 @@ app.post('/login', async (req, res) => {
 
         console.log('Успешный вход для пользователя:', email);
         res.json({ name: user.name, email: user.email });
-        // res.send('Вход успешен!');
     } catch (err) {
         console.error('Ошибка сервера:', err);
         res.status(500).send('Ошибка сервера.');
     }
 });
-
-
 
 // Запуск сервера
 const PORT = 3000;

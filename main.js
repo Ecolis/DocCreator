@@ -2,7 +2,6 @@ const path = require ( 'path');
 const url = require('url');
 const { BrowserWindow, app } = require('electron');
 
-
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
         width: 1280,
@@ -28,7 +27,6 @@ app.on('ready', () => {
         win = null;   
     });
 });
-
 
 app.on('window-all-closed',()=>{
     app.quit();
