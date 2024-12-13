@@ -21,3 +21,7 @@ document.getElementById('exit').addEventListener('click', () => {
     window.location.href = './index.html';
     localStorage.clear;
 });
+
+document.getElementById('create-act').addEventListener('click', () => {
+    window.location.href = './act_form.html';
+});

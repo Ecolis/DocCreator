@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocCreator - новый акт</title>
+    <link href="../css/act_form.css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans"/>
+</head>
+<body>
+    <div class="header">
+        <button id="menu-btn">&#9776;</button>
+    </div>
+
+    <div class="menu" id="menu">
+        <div class="menu-item" id="employee">Сотрудник</div>
+        <div class="submenu" id="employee-submenu">
+            <div class="employee-info">
+                <img src="https://via.placeholder.com/40" alt="Avatar">
+                <div>
+                    <span>Имя Фамилия</span>
+                    <span>email@example.com</span>
+                </div>
+            </div>
+            <div class="menu-item">Профиль</div>
+            <div class="menu-item">Настройки</div>
+            <div class="menu-item">Выйти</div>
+        </div>
+        <div class="menu-item" id="exit-form">Выйти из формы</div>
+    </div>
+ 
+    <div class="main">
+        <div class="step-navigation">
+            <div class="step active" id="step1">Шаг 1: Общее</div>
+            <div class="step" id="step2">Шаг 2: Представители<br></div>
+            <div class="step" id="step3">Шаг 3: Результаты</div>
+            <div class="step" id="step4">Шаг 4: Согласующие</div>
+            <div class="step" id="step5">Шаг 5: Реквизиты</div>
+            <div class="step" id="step6">Шаг 6: Просмотр</div>
+        </div>
+
+        <div class="form-content" id="form-content">
+            <h2>Общее</h2>
+            <form id="step1Form">
+                <label>Объект капитального строительства:</label><br>
+                <input id="objectName" type="text" placeholder="Введите название объекта капитального строительства"><br><br>
+
+                <label>Застройщик или технический заказчик:</label><br>
+                <input id="developerName" type="text" placeholder="Введите имя застройщика или технического заказчика"><br><br>
+
+                <label>Лицо, осуществляющее строительство:</label><br>
+                <input id="builderName" type="text" placeholder="Введите имя лица, осуществляющего строительство"><br><br>
+
+                <label>Описание:</label><br>
+                <textarea id="description" placeholder="Введите описание"></textarea><br><br>
+            </form>
+        </div>
+    </div>
+
+    <script src="../scripts/actForm.js"></script>
+</body>
+</html>
