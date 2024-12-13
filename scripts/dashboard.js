@@ -29,3 +29,29 @@ document.getElementById('create-act').addEventListener('click', () => {
 document.getElementById('act-work').addEventListener('click', () => {
     window.location.href = './act_form.html';
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const container = document.getElementById('acts-container');
+
+    try {
+        // Получаем данные с сервера
+        const response = await fetch('http://localhost:3000/api/acts');
+        if (!response.ok) throw new Error('Ошибка при получении данных');
+        const acts = await response.json();
+
+        // Добавляем акты в DOM
+        acts.forEach((act) => {
+            const actElement = document.createElement('div');
+            actElement.className = 'file-item';
+
+            actElement.innerHTML = `
+                <img src="../img/icon.png" class="file-icon"/>
+                <div class="file-name">${act.name}</div>
+            `;
+
+            container.appendChild(actElement);
+        });
+    } catch (err) {
+        console.error('Ошибка:', err);
+    }
+});

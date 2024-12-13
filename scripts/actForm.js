@@ -39,18 +39,18 @@ const formData = {
     docCopies: ''
 };
 
-        function updateFormData() {
-            const inputs = formContent.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                formData[input.id] = input.value;
-            });
-        }
+function updateFormData() {
+    const inputs = formContent.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        formData[input.id] = input.value;
+    });
+}
 
-        function populateForm(stepId) {
-            formContent.innerHTML = '';
-            switch (stepId) {
-                case 'step1':
-                    formContent.innerHTML = `
+function populateForm(stepId) {
+    formContent.innerHTML = '';
+    switch (stepId) {
+        case 'step1':
+            formContent.innerHTML = `
                         <h2>Общее</h2>
                         <form id="step1Form">
                             <label>Объект капитального строительства:</label><br>
