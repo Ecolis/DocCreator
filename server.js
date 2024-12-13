@@ -18,6 +18,17 @@ const db = mysql.createPool({
 
 app.use(bodyParser.json());
 
+// Фетч данных из БД
+app.get('/api/acts', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM acts'); // Замените "acts" на имя вашей таблицы
+        res.json(rows); // Возвращаем данные в формате JSON
+    } catch (err) {
+        console.error('Ошибка при получении актов:', err);
+        res.status(500).send('Ошибка сервера.');
+    }
+});
+
 // Маршрут для регистрации
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;

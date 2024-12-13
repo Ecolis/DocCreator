@@ -18,10 +18,14 @@ document.addEventListener('click', function(event) {
 });
 
 document.getElementById('exit').addEventListener('click', () => {
+    localStorage.clear();
     window.location.href = './index.html';
-    localStorage.clear;
 });
 
 document.getElementById('create-act').addEventListener('click', () => {
+    window.location.href = './act_form.html';
+});
+
+document.getElementById('act-work').addEventListener('click', () => {
     window.location.href = './act_form.html';
 });

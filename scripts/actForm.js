@@ -1,43 +1,43 @@
 const menuBtn = document.getElementById('menu-btn');
-        const menu = document.getElementById('menu');
-        const employee = document.getElementById('employee');
-        const submenu = document.getElementById('employee-submenu');
-        const steps = document.querySelectorAll('.step');
-        const formContent = document.getElementById('form-content');
+const menu = document.getElementById('menu');
+const employee = document.getElementById('employee');
+const submenu = document.getElementById('employee-submenu');
+const steps = document.querySelectorAll('.step');
+const formContent = document.getElementById('form-content');
 
-        menuBtn.addEventListener('click', () => {
-            menu.classList.toggle('active');
-        });
+menuBtn.addEventListener('click', () => {
+    menu.classList.toggle('active');
+});
 
-        employee.addEventListener('click', () => {
-            submenu.classList.toggle('active');
-        });
+employee.addEventListener('click', () => {
+    submenu.classList.toggle('active');
+});
 
-        const formData = {
-            objectName: '',
-            developerName: '',
-            builderName: '',
-            description: '',
-            repDeveloper: '',
-            repBuilder: '',
-            repBuilderControl: '',
-            repDesigner: '',
-            repExecutor: '',
-            workPerformed: '',
-            inspectionWorks: '',
-            projectDocumentation: '',
-            materialsUsed: '',
-            supportingDocuments: '',
-            agreeDeveloper: '',
-            agreeBuilder: '',
-            agreeBuilderControl: '',
-            agreeDesigner: '',
-            agreeExecutor: '',
-            docTitle: '',
-            docNumber: '',
-            docDate: '',
-            docCopies: ''
-        };
+const formData = {
+    objectName: '',
+    developerName: '',
+    builderName: '',
+    description: '',
+    repDeveloper: '',
+    repBuilder: '',
+    repBuilderControl: '',
+    repDesigner: '',
+    repExecutor: '',
+    workPerformed: '',
+    inspectionWorks: '',
+    projectDocumentation: '',
+    materialsUsed: '',
+    supportingDocuments: '',
+    agreeDeveloper: '',
+    agreeBuilder: '',
+    agreeBuilderControl: '',
+    agreeDesigner: '',
+    agreeExecutor: '',
+    docTitle: '',
+    docNumber: '',
+    docDate: '',
+    docCopies: ''
+};
 
         function updateFormData() {
             const inputs = formContent.querySelectorAll('input, textarea');
