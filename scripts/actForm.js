@@ -245,7 +245,7 @@ function populateForm(stepId) {
                 <p><strong>Номер документа:</strong> ${formData.docNumber}</p>
                 <p><strong>Дата составления:</strong> ${formData.docDate}</p>
                 <p><strong>Количество экземпляров:</strong> ${formData.docCopies}</p>
-                <button type="button" class="btn1">Сохранить</button>
+                <button type="button" onclick="uploadAct()" class="btn1">Сохранить</button>
             `;
         }
 
@@ -253,3 +253,40 @@ function populateForm(stepId) {
 document.getElementById('exit-form').addEventListener('click', () => {
     window.location.href = './dashboard.html';
 });
+
+async function uploadAct() {
+    let data = {
+        name: "Акт выполненных работ",
+        email: ""
+    }
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        data.email = user.email;
+    }
+
+    const act = { ...data, ...formData };
+
+    try {
+        const response = await fetch('http://localhost:3000/api/NewAct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ act }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('OK');
+
+            window.location.href = './dashboard.html';
+        } else {
+            const errorText = await response.text();
+            console.log('Error');
+        }
+    } catch (err) {
+        console.error('Ошибка при добавлении акта:', err);
+        console.log('Server error');
+    }
+}

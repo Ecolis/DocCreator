@@ -31,27 +31,28 @@ document.getElementById('act-work').addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const container = document.getElementById('acts-container');
+    const actsContainer = document.getElementById('acts-container');
 
     try {
-        // Получаем данные с сервера
         const response = await fetch('http://localhost:3000/api/acts');
-        if (!response.ok) throw new Error('Ошибка при получении данных');
+        if (!response.ok) {
+            throw new Error('Ошибка при получении данных');
+        }
         const acts = await response.json();
 
-        // Добавляем акты в DOM
-        acts.forEach((act) => {
+        // Очистка контейнера и отображение актов
+        actsContainer.innerHTML = '';
+        acts.forEach(act => {
             const actElement = document.createElement('div');
             actElement.className = 'file-item';
-
             actElement.innerHTML = `
                 <img src="../img/icon.png" class="file-icon"/>
-                <div class="file-name">${act.name}</div>
+                <div class="file-name">#${act.id}: ${act.name}</div>
             `;
-
-            container.appendChild(actElement);
+            actsContainer.appendChild(actElement);
         });
     } catch (err) {
         console.error('Ошибка:', err);
+        actsContainer.innerHTML = '<p>Ошибка при загрузке актов. Попробуйте позже.</p>';
     }
 });
