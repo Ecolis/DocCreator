@@ -1,6 +1,12 @@
 const path = require ( 'path');
 const url = require('url');
 const { BrowserWindow, app } = require('electron');
+const { ipcMain } = require('electron');
+
+ipcMain.on('restart-app', () => {
+    app.relaunch(); // Перезапускаем приложение
+    app.exit(0);    // Завершаем текущий процесс
+});
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
@@ -21,7 +27,7 @@ app.on('ready', () => {
         slashes: true
     }));
 
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', ()=>{
         win = null;   

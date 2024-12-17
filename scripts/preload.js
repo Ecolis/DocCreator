@@ -4,3 +4,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electron', {
     showAlertSync: (message) => ipcRenderer.invoke('show-alert-sync', message)
 });
+
+contextBridge.exposeInMainWorld('electronAPI', {
+    restartApp: () => ipcRenderer.send('restart-app') // Вызываем перезапуск приложения
+});

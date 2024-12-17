@@ -280,7 +280,7 @@ async function uploadAct() {
             const result = await response.json();
             console.log('OK');
 
-            window.location.href = './dashboard.html';
+            // window.electronAPI.restartApp();
         } else {
             const errorText = await response.text();
             console.log('Error');
