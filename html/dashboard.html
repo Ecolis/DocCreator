@@ -101,6 +101,60 @@
                 </div>
             </div>
 
+            <div class = "categories_part">
+               
+                <div class="categories-title"> 
+                    <p> Категории </p>
+                </div>
+                <div class = "f_part">
+                    <div class = "create_category"> 
+                        <div class="sw_cre_1" >
+                            <button  id = "btn_cre" class = "btn_cre">Создание категории</button>
+                            <div style="display: none" id = "form_create_categories" class = "form_create_categories">
+                                
+                                <p>Введите название категории: </p>
+                                <input id="Name_of_categories" name="Name_of_categories"  size="30" > 
+                                <button class = "add_cat_btm" id = "add_cat_btm" >Создать</button>
+                            </div>
+                        </div> 
+                        <div class = "sw_cre_2">
+                            <button  id = "btn_add_file_in_cat" class = "btn_add_file_in_cat">Добавить файл в категорию</button>
+                            <div style="display: none" id = "add_file_in_cat" class = "add_file_in_cat">
+                                
+                                <p>Введите название категории: </p>
+                                <input id="Name_of_categories_in_add" name="Name_of_categories_in_add"  size="30" >
+                                <p>Введите название файла: </p>
+                                <input id="Name_of_file" name="Name_of_file"  size="30" >  
+                                <button class = "add_file_btm" id = "add_file_btm" >Создать</button>
+                            </div> 
+                        </div>
+                    </div> 
+                    
+                    
+                    
+                    <div class = "delete_cat">
+                        <div class = "sw-del_1">
+                            <button id = "btn_del" class = "btn_del_cre">Удаление категории</button>
+                            <div style="display: none" id="one_line_text" class = "one_line_text"> 
+                                <p>Введите название категории: </p>
+                                <input id="Name_delete_cat" name="Name_delete_cat"  size="30" > 
+                                <button class = "delete_button_cat" id = "delete_button_cat" >Удалить</button>
+                            </div>
+                        </div>
+
+
+                        <p id="text_bottom"></p>
+                    </div>
+                </div>
+                
+                
+
+                <div class = "list_of_categoties" id = "list_of_categoties">
+                    <p id = "text_bottom">Пусто...</p>
+                    
+                </div>  
+            </div>
+
             <div class="recent-files">
                 <div class="recent-files-title">Недавние файлы</div>
                 <div class="file-item">
