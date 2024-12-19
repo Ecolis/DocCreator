@@ -299,6 +299,8 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
             deleteButton.style.border = 'none';
             deleteButton.style.color = '#ff0000';
             deleteButton.style.cursor = 'pointer';
+            deleteButton.style.fontSize = '14px';
+
 
             // Обработчик нажатия на крестик
             deleteButton.addEventListener('click', () => {
