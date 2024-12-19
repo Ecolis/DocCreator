@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocCreator уведомления</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <button id="menu-btn">&#9776;</button>>
+    </div>
+    <div class="menu" id="menu">
+        <div class="menu-item" id="employee">Сотрудник</div>
+        <div class="submenu" id="employee-submenu">
+            <div class="employee-info">
+                <img src="../img/profile.png" class="employee-avatar" alt="avatar"/>
+                <div>
+                    <span>Имя Фамилия</span>
+                    <span>email@example.com</span>
+                </div>
+            </div>
+            <div class="menu-item">Профиль</div>
+            <div class="menu-item">Настройки</div>
+            <div class="menu-item">Выйти</div>
+        </div>
+        <div class="menu-item" id="exit-form">Выйти из формы</div>
+    </div>
+
+    <div class="main">
+        <div class="form-content">
+            <input type="text" id="notification-title" placeholder="Заголовок уведомления">
+            <textarea id="notification-body" placeholder="Текст уведомления"></textarea>
+            
+            <!-- Контейнер для выбора даты и времени -->
+            <div class="date-time-container">
+                <input type="date" id="notification-date">
+                <input type="time" id="notification-time">
+            </div>
+
+            <button class="btn" id="send-notification-btn">Отправить уведомление</button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
