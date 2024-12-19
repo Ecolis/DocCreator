@@ -39,6 +39,58 @@ const formData = {
     docCopies: ''
 };
 
+document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Извлекаем параметр `id`
+    const id = urlParams.get('id');
+
+    if (id) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/Act`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id }),
+            });
+            
+            if (response.ok) {
+                const act = await response.json();
+                console.log(act);
+                formData.objectName = act.act.object;
+                formData.developerName = act.act.buyer;
+                formData.builderName = act.act.person;
+                formData.description = act.act.description;
+                formData.repDeveloper = act.act.person1;
+                formData.repBuilder = act.act.person2;
+                formData.repBuilderControl = act.act.person3;
+                formData.repDesigner = act.act.person4;
+                formData.repExecutor = act.act.person5;
+                formData.workPerformed = act.act.worked;
+                formData.inspectionWorks = act.act.work1;
+                formData.projectDocumentation = act.act.work2;
+                formData.materialsUsed = act.act.work3;
+                formData.supportingDocuments = act.act.documents;
+                formData.agreeDeveloper = act.act.human1;
+                formData.agreeBuilder = act.act.human2;
+                formData.agreeBuilderControl = act.act.human3;
+                formData.agreeDesigner = act.act.human4;
+                formData.agreeExecutor = act.act.human5;
+                formData.docTitle = act.act.bankname;
+                formData.docNumber = act.act.banknumber;
+                formData.docDate = act.act.dateCreated;
+                formData.docCopies = act.act.numDocuments;
+                populateForm('step1');
+                updateFormData();
+            } else {
+                console.error('Ошибка при получении акта:', response.status);
+            }
+        } catch (err) {
+            console.error('Ошибка при получении акта:', err);
+        }
+    }
+});
+
 function updateFormData() {
     const inputs = formContent.querySelectorAll('input, textarea');
     inputs.forEach(input => {

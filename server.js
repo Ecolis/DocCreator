@@ -44,6 +44,33 @@ app.get('/api/notifications', async (req, res) => {
     }
 });
 
+app.post('/api/Act', async (req, res) => {
+    const { id } = req.body;
+
+    try {
+        const query = "SELECT * FROM `acts` WHERE id = ?";
+
+        // Выполняем запрос
+        const [rows] = await db.query(query, [id]);
+        console.log('Результат SQL-запроса:', rows);
+
+        if (rows.length === 0) {
+            console.error('Ошибка: не найден.');
+            return res.status(404).send('не найден.');
+        }
+
+        const act = rows[0];
+        console.log('Найден:', act);
+
+        console.log('Успешно:', id);
+        res.json({ act });
+    } catch (err) {
+        console.error('Ошибка сервера:', err);
+        res.status(500).send('Ошибка сервера.');
+    }
+});
+
+
 // Маршрут для добавления нового акта
 app.post('/api/NewAct', async (req, res) => {
     const { act } = req.body; // Получаем данные из тела запроса

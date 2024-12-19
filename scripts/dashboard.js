@@ -51,8 +51,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const actElement = document.createElement('div');
             actElement.className = 'file-item';
             actElement.innerHTML = `
-                <img src="../img/icon.png" class="file-icon"/>
-                <div class="file-name">#${act.id}: ${act.name}</div>
+                <a href="./act_form.html?id=${act.id}">
+                    <img src="../img/icon.png" class="file-icon"/>
+                    <div class="file-name">#${act.id}: ${act.name}</div>
+                </a>
             `;
             actsContainer.appendChild(actElement);
         });
