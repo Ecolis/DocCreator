@@ -275,13 +275,41 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
             }
 
             // Копируем ссылку
+            const linkWrapper = document.createElement('div');
+            linkWrapper.style.position = 'relative';
+            linkWrapper.style.marginBottom = '5px';
+
             const newLink = document.createElement('a');
             newLink.href = foundLink.href;
             newLink.textContent = foundLink.textContent;
-            newLink.target = '_blank';
-            newLink.style.display = 'block'; // Блочный элемент для новой строки
+            newLink.style.textDecoration = 'none';
+            newLink.style.color = '#007bff'; // Цвет ссылки
+            newLink.onclick = (event) => {
+                event.preventDefault(); // Отключаем открытие новой вкладки
+                window.location.href = newLink.href; // Перенаправление в текущем окне
+            };
 
-            div.appendChild(newLink); // Добавляем в содержимое категории
+            // Добавляем крестик для удаления
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '×';
+            deleteButton.style.position = 'absolute';
+            deleteButton.style.right = '0';
+            deleteButton.style.top = '0';
+            deleteButton.style.background = 'none';
+            deleteButton.style.border = 'none';
+            deleteButton.style.color = '#ff0000';
+            deleteButton.style.cursor = 'pointer';
+            deleteButton.onclick = () => {
+                linkWrapper.remove(); // Удаляем ссылку
+                saveCategories(); // Сохраняем изменения
+            };
+
+            // Добавляем ссылку и кнопку удаления в обёртку
+            linkWrapper.appendChild(newLink);
+            linkWrapper.appendChild(deleteButton);
+
+            // Добавляем обёртку в категорию
+            div.appendChild(linkWrapper);
 
             // Сохраняем изменения в LocalStorage
             saveCategories();
@@ -300,6 +328,7 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
     document.getElementById('Name_of_categories_in_add').value = '';
     document.getElementById('Name_of_file').value = '';
 });
+
 
 
 
