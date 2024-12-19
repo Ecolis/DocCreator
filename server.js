@@ -32,7 +32,6 @@ app.get('/api/acts', async (req, res) => {
     }
 });
 
-
 // Маршрут для добавления нового акта
 app.post('/api/NewAct', async (req, res) => {
     const { act } = req.body; // Получаем данные из тела запроса

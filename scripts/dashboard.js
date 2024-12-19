@@ -23,7 +23,11 @@ document.getElementById('exit').addEventListener('click', () => {
 });
 
 document.getElementById('create-act').addEventListener('click', () => {
-    window.location.href = './act_form.html';
+    window.location.href = './dashboard.html';
+});
+
+document.getElementById('add-notification').addEventListener('click', () => {
+    window.location.href = './notification.html';
 });
 
 document.getElementById('act-work').addEventListener('click', () => {

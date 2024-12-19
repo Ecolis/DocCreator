@@ -1,6 +1,4 @@
 // Получаем элементы
-const menu = document.getElementById('menu');
-const menuBtn = document.getElementById('menu-btn');
 const sendNotificationBtn = document.getElementById('send-notification-btn');
 const notificationTitleInput = document.getElementById('notification-title');
 const notificationBodyInput = document.getElementById('notification-body');
@@ -10,21 +8,9 @@ const employeeMenu = document.getElementById('employee');
 const employeeSubmenu = document.getElementById('employee-submenu');
 
 // Проверяем, что элементы найдены
-if (!menu || !menuBtn || !sendNotificationBtn) {
+if (!sendNotificationBtn) {
     console.error("Элементы не найдены в DOM!");
 }
-
-// Переключение отображения бокового меню
-menuBtn.addEventListener('click', () => {
-    console.log("Кнопка меню нажата");
-    menu.classList.toggle('active');
-});
-
-// Открытие/закрытие подменю "Сотрудник"
-employeeMenu.addEventListener('click', () => {
-    console.log("Кнопка 'Сотрудник' нажата");
-    employeeSubmenu.classList.toggle('active')
-});
 
 sendNotificationBtn.addEventListener('click', () => {
     const title = notificationTitleInput.value;
@@ -62,7 +48,7 @@ sendNotificationBtn.addEventListener('click', () => {
         // Отправляем уведомление
         const notification = new Notification(title, {
             body: `${body}\nДата: ${date}\nВремя: ${time}`,
-            icon: 'icon.png',  // Замените на путь к вашей иконке
+            icon: './img/icon.png',
         });
 
         // Действие при клике на уведомление
