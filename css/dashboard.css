@@ -513,3 +513,7 @@ textarea {
     color: #333;
     font-style: italic;
 }
+
+.recent-files {
+    margin-bottom: 30px;
+}

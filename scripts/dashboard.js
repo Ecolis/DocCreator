@@ -36,6 +36,7 @@ document.getElementById('act-work').addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const actsContainer = document.getElementById('acts-container');
+    const notificationsContainer = document.getElementById('notifications-container');
 
     try {
         const response = await fetch('http://localhost:3000/api/acts');
@@ -58,6 +59,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
         console.error('Ошибка:', err);
         actsContainer.innerHTML = '<p>Ошибка при загрузке актов. Попробуйте позже.</p>';
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/api/notifications');
+        if (!response.ok) {
+            throw new Error('Ошибка при получении данных');
+        }
+        const notifications = await response.json();
+
+        // Очистка контейнера и отображение актов
+        notificationsContainer.innerHTML = '';
+        notifications.forEach(noti => {
+            const notiElement = document.createElement('div');
+            notiElement.className = 'file-item';
+        
+            let formattedDate = 'Неверная дата';
+            if (noti.dateN && !isNaN(new Date(noti.dateN))) {
+                formattedDate = new Intl.DateTimeFormat('ru-RU', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                }).format(new Date(noti.dateN));
+            }
+        
+            notiElement.innerHTML = `
+                <div class="notification-title" style="font-weight: bold;">${noti.title}</div>
+                <div class="notification-body">&nbsp; ${noti.description}</div>
+                <div class="notification-time">. Запланировано на ${formattedDate}</div>
+            `;
+            notificationsContainer.appendChild(notiElement);
+        });
+        
+    } catch (err) {
+        console.error('Ошибка:', err);
+        actsContainer.innerHTML = '<p>Ошибка при загрузке. Попробуйте позже.</p>';
     }
 });
 

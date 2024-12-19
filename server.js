@@ -32,6 +32,18 @@ app.get('/api/acts', async (req, res) => {
     }
 });
 
+app.get('/api/notifications', async (req, res) => {
+    try {
+        console.log('Получение...');
+        const [rows] = await db.query('SELECT * FROM notifications');
+        console.log('из базы данных:', rows);
+        res.status(200).json(rows);
+    } catch (err) {
+        console.error('Ошибка при получении:', err);
+        res.status(500).send('Ошибка при получении.');
+    }
+});
+
 // Маршрут для добавления нового акта
 app.post('/api/NewAct', async (req, res) => {
     const { act } = req.body; // Получаем данные из тела запроса
