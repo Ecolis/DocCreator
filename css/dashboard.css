@@ -120,6 +120,10 @@ textarea {
     background: #9eedffa6;
 }
 
+.active {
+    background: #9eedffa6;
+}
+
 .form-content {
     margin-left: 5px;
     flex: 1;
