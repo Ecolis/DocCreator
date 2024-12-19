@@ -14,6 +14,7 @@ const db = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
+    charset: 'utf8mb4'
 });
 
 app.use(bodyParser.json());
@@ -21,10 +22,33 @@ app.use(bodyParser.json());
 // Фетч данных из БД
 app.get('/api/acts', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM acts'); // Замените "acts" на имя вашей таблицы
-        res.json(rows); // Возвращаем данные в формате JSON
+        console.log('Получение актов...');
+        const [rows] = await db.query('SELECT * FROM acts');
+        console.log('Акты из базы данных:', rows);
+        res.status(200).json(rows);
     } catch (err) {
         console.error('Ошибка при получении актов:', err);
+        res.status(500).send('Ошибка при получении актов.');
+    }
+});
+
+// Маршрут для добавления нового акта
+app.post('/api/NewAct', async (req, res) => {
+    const { act } = req.body; // Получаем данные из тела запроса
+    console.log('Данные для вставки:', act);
+
+    try {
+        const query = 'INSERT INTO `acts` (`name`, `email`, `object`, `buyer`, `person`, `description`, `person1`, `person2`, `person3`, `person4`, `person5`, `worked`, `work1`, `work2`, `work3`, `documents`, `human1`, `human2`, `human3`, `human4`, `human5`, `bankname`, `banknumber`, `dateCreated`, `numDocuments`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        const [result] = await db.query(query, [act.name, act.email, act.objectName, act.developerName, act.builderName, act.description, act.repDeveloper, act.repBuilder,
+            act.repBuilderControl, act.repDesigner, act.repExecutor, act.workPerformed, act.inspectionWorks, act.projectDocumentation, act.materialsUsed, act.supportingDocuments,
+            act.agreeDeveloper, act.agreeBuilder, act.agreeBuilderControl, act.agreeDesigner, act.agreeExecutor, act.docTitle, act.docNumber, act.docDate, act.docCopies]);
+
+        res.status(201).send({
+            message: 'Акт добавлен успешно!',
+            actId: result.insertId // Возвращаем ID нового акта
+        });
+    } catch (err) {
+        console.error('Ошибка при добавлении акта:', err);
         res.status(500).send('Ошибка сервера.');
     }
 });

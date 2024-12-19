@@ -23,13 +23,43 @@ document.getElementById('exit').addEventListener('click', () => {
 });
 
 document.getElementById('create-act').addEventListener('click', () => {
-    window.location.href = './act_form.html';
+    window.location.href = './dashboard.html';
+});
+
+document.getElementById('add-notification').addEventListener('click', () => {
+    window.location.href = './notification.html';
 });
 
 document.getElementById('act-work').addEventListener('click', () => {
     window.location.href = './act_form.html';
 });
 
+document.addEventListener('DOMContentLoaded', async () => {
+    const actsContainer = document.getElementById('acts-container');
+
+    try {
+        const response = await fetch('http://localhost:3000/api/acts');
+        if (!response.ok) {
+            throw new Error('Ошибка при получении данных');
+        }
+        const acts = await response.json();
+
+        // Очистка контейнера и отображение актов
+        actsContainer.innerHTML = '';
+        acts.forEach(act => {
+            const actElement = document.createElement('div');
+            actElement.className = 'file-item';
+            actElement.innerHTML = `
+                <img src="../img/icon.png" class="file-icon"/>
+                <div class="file-name">#${act.id}: ${act.name}</div>
+            `;
+            actsContainer.appendChild(actElement);
+        });
+    } catch (err) {
+        console.error('Ошибка:', err);
+        actsContainer.innerHTML = '<p>Ошибка при загрузке актов. Попробуйте позже.</p>';
+    }
+});
 
 // Функция для сохранения категорий в LocalStorage
 function saveCategories() {
@@ -237,6 +267,3 @@ document.getElementById('btn_add_file_in_cat').addEventListener('click', () => {
 
 // Загружаем категории при загрузке страницы
 window.addEventListener('load', loadCategories);
-
-
-

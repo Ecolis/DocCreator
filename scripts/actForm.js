@@ -39,18 +39,18 @@ const formData = {
     docCopies: ''
 };
 
-        function updateFormData() {
-            const inputs = formContent.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                formData[input.id] = input.value;
-            });
-        }
+function updateFormData() {
+    const inputs = formContent.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        formData[input.id] = input.value;
+    });
+}
 
-        function populateForm(stepId) {
-            formContent.innerHTML = '';
-            switch (stepId) {
-                case 'step1':
-                    formContent.innerHTML = `
+function populateForm(stepId) {
+    formContent.innerHTML = '';
+    switch (stepId) {
+        case 'step1':
+            formContent.innerHTML = `
                         <h2>Общее</h2>
                         <form id="step1Form">
                             <label>Объект капитального строительства:</label><br>
@@ -245,7 +245,7 @@ const formData = {
                 <p><strong>Номер документа:</strong> ${formData.docNumber}</p>
                 <p><strong>Дата составления:</strong> ${formData.docDate}</p>
                 <p><strong>Количество экземпляров:</strong> ${formData.docCopies}</p>
-                <button type="button" class="btn1">Сохранить</button>
+                <button type="button" onclick="uploadAct()" class="btn1">Сохранить</button>
             `;
         }
 
@@ -253,3 +253,40 @@ const formData = {
 document.getElementById('exit-form').addEventListener('click', () => {
     window.location.href = './dashboard.html';
 });
+
+async function uploadAct() {
+    let data = {
+        name: "Акт выполненных работ",
+        email: ""
+    }
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        data.email = user.email;
+    }
+
+    const act = { ...data, ...formData };
+
+    try {
+        const response = await fetch('http://localhost:3000/api/NewAct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ act }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('OK');
+
+            // window.electronAPI.restartApp();
+        } else {
+            const errorText = await response.text();
+            console.log('Error');
+        }
+    } catch (err) {
+        console.error('Ошибка при добавлении акта:', err);
+        console.log('Server error');
+    }
+}

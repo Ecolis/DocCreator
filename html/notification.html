@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocCreator - Панель управления</title>
+    <title>DocCreator уведомления</title>
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
@@ -33,13 +33,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="sidebar-item active" id="create-act">
+                <div class="sidebar-item" id="create-act">
                     <svg class="sidebar-icon" viewBox="0 0 24 24">
                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
                     </svg>
                     <span class="sidebar-text">Создать</span>
                 </div>
-                <div class="sidebar-item" id="add-notification">
+                <div class="sidebar-item active" id="add-notification">
                     <svg class="sidebar-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.556 8.5h8m-8 3.5H12m7.111-7H4.89a.896.896 0 0 0-.629.256.868.868 0 0 0-.26.619v9.25c0 .232.094.455.26.619A.896.896 0 0 0 4.89 16H9l3 4 3-4h4.111a.896.896 0 0 0 .629-.256.868.868 0 0 0 .26-.619v-9.25a.868.868 0 0 0-.26-.619.896.896 0 0 0-.63-.256Z"/>
                     </svg>
@@ -75,78 +75,24 @@
         </div>
 
         <div class="main-content">
-            <h1 class="header">Создать новый акт</h1>
+            <h1 class="header">Создать новое напоминание</h1>
 
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Поиск...">
-            </div>
+            <div class="form-content">
+                <input type="text" id="notification-title" placeholder="Заголовок уведомления">
+                <textarea id="notification-body" placeholder="Текст уведомления"></textarea>
+                
+                <!-- Контейнер для выбора даты и времени -->
+                <div class="date-time-container">
+                    <input type="date" id="notification-date">
+                    <input type="time" id="notification-time">
+                </div>
 
-            <div class="templates-section">
-                <div class="templates-title">Создать по шаблону</div>
-                <div class="templates-grid">
-                    <div class="template-card">
-                        <div class="template-icon add-template-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#999"/>
-                            </svg>
-                        </div>
-                        <div class="template-text">Добавить шаблон</div>
-                    </div>
-                    <div class="template-card" id="act-work">
-                        <div class="template-icon"></div>
-                        <div class="template-text">Акт работ</div>
-                    </div>
-                    <div class="template-card">
-                        <div class="template-icon"></div>
-                        <div class="template-text">Акт приемки выполненных работ</div>
-                    </div>
-                    <div class="template-card">
-                        <div class="template-icon"></div>
-                        <div class="template-text">Акт освидетельствования работ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="categories_part">
-                <div class="categories-title">
-                    <p>Категории</p>
-                </div>
-                <div class="f_part">
-                    <div class="create_category">
-                        <div class="button-container">
-                            <button id="btn_cre" class="btn_cre">Создание категории</button>
-                            <button id="btn_add_file_in_cat" class="btn_add_file_in_cat">Добавить файл в категорию</button>
-                            <button id="btn_del" class="btn_del_cre">Удаление категории</button>
-                        </div>
-                        <div style="display: none" id="form_create_categories" class="form_create_categories">
-                            <p>Введите название категории:</p>
-                            <input id="Name_of_categories" name="Name_of_categories" size="30">
-                            <button class="add_cat_btm" id="add_cat_btm">Создать</button>
-                        </div>
-                        <div style="display: none" id="add_file_in_cat" class="add_file_in_cat">
-                            <p>Введите название категории:</p>
-                            <input id="Name_of_categories_in_add" name="Name_of_categories_in_add" size="30">
-                            <p>Введите название файла:</p>
-                            <input id="Name_of_file" name="Name_of_file" size="30">
-                            <button class="add_file_btm" id="add_file_btm">Создать</button>
-                        </div>
-                        <div style="display: none" id="one_line_text" class="one_line_text">
-                            <p>Введите название категории:</p>
-                            <input id="Name_delete_cat" name="Name_delete_cat" size="30">
-                            <button class="delete_button_cat" id="delete_button_cat">Удалить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="list_of_categoties" id="list_of_categoties">
-                    <p id="text_bottom">Пусто...</p>
-                </div>
-            </div>
-
-            <div class="recent-files">
-                <div class="recent-files-title">Недавние файлы</div>
-                <div id="acts-container"></div>
+                <button class="btn" id="send-notification-btn">Отправить уведомление</button>
             </div>
         </div>
     </div>
-    <script src="../scripts/dashboard.js"></script>
+
+    <script src="../scripts/notification.js"></script>
+    <script src="../scripts/renderer.js"></script>
 </body>
 </html>
