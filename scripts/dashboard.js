@@ -274,7 +274,7 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
                 return;
             }
 
-            // Копируем ссылку
+            // Создаём обёртку для ссылки
             const linkWrapper = document.createElement('div');
             linkWrapper.style.position = 'relative';
             linkWrapper.style.marginBottom = '5px';
@@ -299,12 +299,16 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
             deleteButton.style.border = 'none';
             deleteButton.style.color = '#ff0000';
             deleteButton.style.cursor = 'pointer';
-            deleteButton.onclick = () => {
-                linkWrapper.remove(); // Удаляем ссылку
-                saveCategories(); // Сохраняем изменения
-            };
 
-            // Добавляем ссылку и кнопку удаления в обёртку
+            // Обработчик нажатия на крестик
+            deleteButton.addEventListener('click', () => {
+                linkWrapper.remove(); // Удаляем обёртку со ссылкой
+                saveCategories(); // Сохраняем изменения
+                p.innerHTML = "Ссылка успешно удалена.";
+                p.style.color = "green";
+            });
+
+            // Добавляем элементы в обёртку
             linkWrapper.appendChild(newLink);
             linkWrapper.appendChild(deleteButton);
 
@@ -328,6 +332,7 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
     document.getElementById('Name_of_categories_in_add').value = '';
     document.getElementById('Name_of_file').value = '';
 });
+
 
 
 
