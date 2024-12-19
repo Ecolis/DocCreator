@@ -53,6 +53,25 @@ app.post('/api/NewAct', async (req, res) => {
     }
 });
 
+// Маршрут для добавления нового уведомления
+app.post('/api/newNotification', async (req, res) => {
+    const { notification } = req.body; // Получаем данные из тела запроса
+    console.log('Данные для вставки:', notification);
+
+    try {
+        const query = 'INSERT INTO `notifications` (`title`, `description`, `dateN`, `timeN`, `userId`) VALUES (?, ?, ?, ?, ?)'
+        const [result] = await db.query(query, [notification.title, notification.description, notification.dateN, notification.timeN, notification.userId]);
+
+        res.status(201).send({
+            message: 'Уведомление добавлено успешно!',
+            actId: result.insertId // Возвращаем ID
+        });
+    } catch (err) {
+        console.error('Ошибка при добавлении:', err);
+        res.status(500).send('Ошибка сервера.');
+    }
+});
+
 // Маршрут для регистрации
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
