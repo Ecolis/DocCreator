@@ -226,72 +226,57 @@ document.getElementById('delete_button_cat').addEventListener('click', () => {
 });
 
 // Добавление файла в категорию
-document.getElementById('add_file_btm').addEventListener('click', () => {
+document.getElementById('add_file_btm').addEventListener('click', async () => {
     const categoryName = document.getElementById('Name_of_categories_in_add').value.trim();
-    const fileName = document.getElementById('Name_of_file').value.trim();
+    const actId = document.getElementById('Name_of_file').value.trim();
     let p = document.getElementById("text_bottom");
 
-    if (!categoryName || !fileName) { // Проверяем, что оба поля заполнены
+    if (!categoryName || !actId) { // Проверяем, что оба поля заполнены
         p.innerHTML = "Не все поля заполнены!";
         p.style.color = "red";
         return;
     }
 
-    const buttons = document.querySelectorAll('.categoty_accordion');
-    let categoryFound = false;
-
-    buttons.forEach(button => {
-        if (button.innerHTML === categoryName) {
-            categoryFound = true;
-            const div = button.nextElementSibling; // Связанный div с содержимым категории
-
-            // Создаём div для файла
-            const fileElement = document.createElement('div');
-            fileElement.className = 'item_into_cat';
-
-            // Кнопка-крестик для удаления
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'delete-file-button';
-            deleteButton.innerHTML = '×';
-            deleteButton.style.position = 'absolute';
-            deleteButton.style.top = '5px';
-            deleteButton.style.right = '5px';
-
-            // Добавляем текст в div
-            const fileText = document.createElement('span');
-            fileText.textContent = fileName;
-
-            // Добавляем обработчик для удаления файла
-            deleteButton.addEventListener('click', () => {
-                fileElement.remove();
-                saveCategories(); // Сохраняем изменения
-            });
-
-            // Добавляем крестик и текст в div
-            fileElement.appendChild(deleteButton);
-            fileElement.appendChild(fileText);
-            fileElement.style.position = 'relative';
-            fileElement.style.width = '100px';
-            fileElement.style.height = '100px';
-            fileElement.style.border = '1px solid #ccc';
-            fileElement.style.margin = '5px';
-            fileElement.style.display = 'inline-block';
-            fileElement.style.textAlign = 'center';
-            fileElement.style.verticalAlign = 'middle';
-            fileElement.style.lineHeight = '100px';
-
-            div.appendChild(fileElement); // Добавляем в содержимое категории
-
-            // Сохраняем изменения в LocalStorage
-            saveCategories();
+    try {
+        // Запрос на сервер для получения акта по ID
+        const response = await fetch(`http://localhost:3000/api/acts/${actId}`);
+        if (!response.ok) {
+            throw new Error(`Акт с ID ${actId} не найден`);
         }
-    });
+        const act = await response.json();
 
-    if (categoryFound) {
-        p.innerHTML = "Файл добавлен.";
-        p.style.color = "green";
-    } else {
-        p.innerHTML = "Категория не найдена.";
+        const buttons = document.querySelectorAll('.categoty_accordion');
+        let categoryFound = false;
+
+        buttons.forEach(button => {
+            if (button.innerHTML === categoryName) {
+                categoryFound = true;
+                const div = button.nextElementSibling; // Связанный div с содержимым категории
+
+                // Создаём ссылку на акт
+                const linkElement = document.createElement('a');
+                linkElement.href = `http://localhost:3000/acts/${actId}`; // Ссылка на акт
+                linkElement.textContent = `${act.name} (ID: ${act.id})`;
+                linkElement.target = '_blank';
+                linkElement.style.display = 'block'; // Блочный элемент для новой строки
+
+                div.appendChild(linkElement); // Добавляем в содержимое категории
+
+                // Сохраняем изменения в LocalStorage
+                saveCategories();
+            }
+        });
+
+        if (categoryFound) {
+            p.innerHTML = "Ссылка на акт добавлена.";
+            p.style.color = "green";
+        } else {
+            p.innerHTML = "Категория не найдена.";
+            p.style.color = "red";
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+        p.innerHTML = `Ошибка: ${error.message}`;
         p.style.color = "red";
     }
 
@@ -299,6 +284,7 @@ document.getElementById('add_file_btm').addEventListener('click', () => {
     document.getElementById('Name_of_categories_in_add').value = '';
     document.getElementById('Name_of_file').value = '';
 });
+
 
 // Переключение отображения для добавления файла в категорию
 document.getElementById('btn_add_file_in_cat').addEventListener('click', () => {
