@@ -226,7 +226,7 @@ document.getElementById('delete_button_cat').addEventListener('click', () => {
 });
 
 // Добавление файла в категорию
-document.getElementById('add_file_btm').addEventListener('click', async () => {
+document.getElementById('add_file_btm').addEventListener('click', () => {
     const categoryName = document.getElementById('Name_of_categories_in_add').value.trim();
     const actId = document.getElementById('Name_of_file').value.trim();
     let p = document.getElementById("text_bottom");
@@ -237,46 +237,62 @@ document.getElementById('add_file_btm').addEventListener('click', async () => {
         return;
     }
 
-    try {
-        // Запрос на сервер для получения акта по ID
-        const response = await fetch(`http://localhost:3000/api/acts/${actId}`);
-        if (!response.ok) {
-            throw new Error(`Акт с ID ${actId} не найден`);
+    const recentFilesContainer = document.getElementById('acts-container');
+    const recentFilesLinks = recentFilesContainer.querySelectorAll('a'); // Предполагаем, что ссылки на акты — это <a>
+
+    let foundLink = null;
+
+    // Ищем ссылку с указанным ID
+    recentFilesLinks.forEach(link => {
+        if (link.href.includes(actId)) {
+            foundLink = link;
         }
-        const act = await response.json();
+    });
 
-        const buttons = document.querySelectorAll('.categoty_accordion');
-        let categoryFound = false;
+    if (!foundLink) {
+        p.innerHTML = `Акт с ID ${actId} не найден в недавних файлах.`;
+        p.style.color = "red";
+        return;
+    }
 
-        buttons.forEach(button => {
-            if (button.innerHTML === categoryName) {
-                categoryFound = true;
-                const div = button.nextElementSibling; // Связанный div с содержимым категории
+    // Ищем категорию
+    const buttons = document.querySelectorAll('.categoty_accordion');
+    let categoryFound = false;
 
-                // Создаём ссылку на акт
-                const linkElement = document.createElement('a');
-                linkElement.href = `http://localhost:3000/acts/${actId}`; // Ссылка на акт
-                linkElement.textContent = `${act.name} (ID: ${act.id})`;
-                linkElement.target = '_blank';
-                linkElement.style.display = 'block'; // Блочный элемент для новой строки
+    buttons.forEach(button => {
+        if (button.innerHTML === categoryName) {
+            categoryFound = true;
+            const div = button.nextElementSibling; // Связанный div с содержимым категории
 
-                div.appendChild(linkElement); // Добавляем в содержимое категории
+            // Проверяем, что ссылка ещё не добавлена
+            const existingLinks = div.querySelectorAll('a');
+            const isAlreadyAdded = Array.from(existingLinks).some(link => link.href === foundLink.href);
 
-                // Сохраняем изменения в LocalStorage
-                saveCategories();
+            if (isAlreadyAdded) {
+                p.innerHTML = "Эта ссылка уже добавлена в категорию.";
+                p.style.color = "orange";
+                return;
             }
-        });
 
-        if (categoryFound) {
-            p.innerHTML = "Ссылка на акт добавлена.";
-            p.style.color = "green";
-        } else {
-            p.innerHTML = "Категория не найдена.";
-            p.style.color = "red";
+            // Копируем ссылку
+            const newLink = document.createElement('a');
+            newLink.href = foundLink.href;
+            newLink.textContent = foundLink.textContent;
+            newLink.target = '_blank';
+            newLink.style.display = 'block'; // Блочный элемент для новой строки
+
+            div.appendChild(newLink); // Добавляем в содержимое категории
+
+            // Сохраняем изменения в LocalStorage
+            saveCategories();
         }
-    } catch (error) {
-        console.error('Ошибка:', error);
-        p.innerHTML = `Ошибка: ${error.message}`;
+    });
+
+    if (categoryFound) {
+        p.innerHTML = "Ссылка на акт добавлена.";
+        p.style.color = "green";
+    } else {
+        p.innerHTML = "Категория не найдена.";
         p.style.color = "red";
     }
 
@@ -284,6 +300,7 @@ document.getElementById('add_file_btm').addEventListener('click', async () => {
     document.getElementById('Name_of_categories_in_add').value = '';
     document.getElementById('Name_of_file').value = '';
 });
+
 
 
 // Переключение отображения для добавления файла в категорию
